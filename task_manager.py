@@ -2,6 +2,16 @@
 
 from models import Task
 
+def create_task(title, description, due_date):
+    try:
+        new_task = Task(title, description, due_date)
+        task = new_task.add_task()
+        if task:
+            print("Task created successfully!")
+            return True
+    except Exception as e:
+        print(f"Error: {e}")
+    
 def main():
     print("Menu:\n1. Create a task\n2. View tasks\n3. Update a task\n4. Delete a task\n5. Search for tasks\n6. Exit")
     while True:
@@ -16,11 +26,7 @@ def main():
                 due_date = input("Enter task due date (YYYY-MM-DD): ")
                 if len(due_date.split("-")) != 3:
                     print("Invalid format. Please use YYYY-MM-DD")
-                try:
-                    new_task = Task(title, description, due_date)
-                    new_task.add_task()
-                except Exception as e:
-                    print(f"Error: {e}")
+                create_task(title, description, due_date)
         except ValueError:
             print("Enter only integer numbers (1 - 6)")
         

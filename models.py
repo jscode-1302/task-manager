@@ -1,6 +1,6 @@
 # models.py
 
-from utils import PATH, validate_and_parse_date as valid_date, save_data
+from utils import PATH, validate_and_parse_date as valid_date, save_data, generate_id
 
 class TaskError(Exception):
     pass
@@ -26,6 +26,10 @@ class Task:
             raise DateError("Invalid date format. Enter date format YYYY-MM-DD")
         self._due_date = validated_date
         
+        self.id = generate_id(file_path=PATH)
+        
+        self.status = "Pending"
+        
     def add_task(self, file_path=PATH):
         data = self.to_dict()
         save_data(data, file_path)
@@ -42,8 +46,10 @@ class Task:
     
     def to_dict(self):
         data = {
+            "id": self.id,
             "title": self._title,
             "description": self._description,
-            "due_date": self._due_date.strftime("%Y-%m-%d") if self._due_date else None
+            "due_date": self._due_date.strftime("%Y-%m-%d") if self._due_date else None,
+            "status": self.status
         }
         return data
