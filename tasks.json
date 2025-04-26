@@ -9,16 +9,9 @@
     },
     {
       "id": 2,
-      "title": "Learn SQL",
-      "description": "SQLite and PostgreSQL",
-      "due_date": "2025-04-30",
-      "status": "Pending"
-    },
-    {
-      "id": 3,
-      "title": "Learn English",
-      "description": "Study every day to get fluent",
-      "due_date": "2025-04-25",
+      "title": "Practice English",
+      "description": "Lesson every saturday with Patrick",
+      "due_date": "2025-04-26",
       "status": "Pending"
     }
   ]

@@ -1,6 +1,6 @@
 # models.py
 
-from utils import PATH, validate_and_parse_date as valid_date, save_data, generate_id
+from utils import PATH, validate_and_parse_date as valid_date, save_data, generate_id, load_data
 
 class TaskError(Exception):
     pass
@@ -41,8 +41,9 @@ class Task:
     def delete_task(self):
         pass
     
-    def view_tasks(self):
-        pass
+    @classmethod
+    def view_tasks(cls, file_path=PATH):
+        return load_data(file_path)
     
     def to_dict(self):
         data = {

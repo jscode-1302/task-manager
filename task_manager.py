@@ -11,6 +11,13 @@ def create_task(title, description, due_date):
             return True
     except Exception as e:
         print(f"Error: {e}")
+        
+def display_tasks():
+    tasks = Task.view_tasks()
+    for k,v in tasks.items():
+        print(f"\n{k.capitalize()}:")
+        for task in v:
+            print(f"\033[31mId:\033[0m {task["id"]} - \033[31mTitle:\033[0m {task["title"]} - \033[31mDescription:\033[0m {task["description"]} - \033[31mDue date:\033[0m {task["due_date"]} - \033[31mStatus:\033[0m {task["status"]}")
     
 def main():
     print("Menu:\n1. Create a task\n2. View tasks\n3. Update a task\n4. Delete a task\n5. Search for tasks\n6. Exit")
@@ -27,6 +34,8 @@ def main():
                 if len(due_date.split("-")) != 3:
                     print("Invalid format. Please use YYYY-MM-DD")
                 create_task(title, description, due_date)
+            elif option == 2:
+                display_tasks()
         except ValueError:
             print("Enter only integer numbers (1 - 6)")
         
