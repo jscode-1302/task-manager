@@ -61,6 +61,7 @@ class TaskManager:
             
     def load_tasks(self):
         data = load_data()
+        self.tasks.clear()
         for task_data in data.get("tasks", []):
             task = Task(
                 title = task_data["title"],
@@ -77,21 +78,27 @@ class TaskManager:
             json.dump(data, f, indent=2)
 
     def add_task(self, task):
+        if not self.tasks:
+            self.load_tasks()
         self.tasks.append(task)
+        self.save_tasks()
+        return True
     
     def update_task(self, id, updated_task):
-        if self.find_id(id):
+        if self.tasks:
             for index, task in enumerate(self.tasks):
                 if id == task.id:
                     self.tasks[index] = updated_task
                     updated_task.id = id # mantenemos id original porque el constructor genera uno nuevo
                     self.save_tasks()
                     break
-        else:
-            raise ValueError("Task ID not found.")
     
     def delete_task(self, id):
-        pass
+        task = self.find_task(id)
+        if task:
+            self.tasks.remove(task)
+            self.save_tasks()
+            return True
     
     def find_task(self, id):
         if self.find_id(id):
@@ -100,10 +107,14 @@ class TaskManager:
                     return self.tasks[index]
     
     def find_id(self, id):
+        if not self.tasks:
+            self.load_tasks()
         for task in self.tasks:
             if id == task.id:
                 return True
         return False
     
     def view_tasks(self):
+        if not self.tasks:
+            self.load_tasks()
         return self.tasks

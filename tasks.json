@@ -25,7 +25,42 @@
       "id": 4,
       "title": "Buy food for the week",
       "description": "Go to the extra market today",
-      "due_date": "2025-04-27",
+      "due_date": "2025-04-28",
+      "status": "Pending"
+    },
+    {
+      "id": 5,
+      "title": "Call my mom",
+      "description": "Ask her for my brother's grades",
+      "due_date": "2025-04-30",
+      "status": "Pending"
+    },
+    {
+      "id": 6,
+      "title": "Pay car loan",
+      "description": "Monthly payment",
+      "due_date": "2025-05-05",
+      "status": "Pending"
+    },
+    {
+      "id": 8,
+      "title": "Read a book",
+      "description": "Reading at least 3 pages per day",
+      "due_date": "2025-05-30",
+      "status": "Pending"
+    },
+    {
+      "id": 9,
+      "title": "Buy a Mac",
+      "description": "It's a gift for Gisell",
+      "due_date": "2025-05-05",
+      "status": "Pending"
+    },
+    {
+      "id": 10,
+      "title": "Buy new summer clothes",
+      "description": "T-shirts and shorts",
+      "due_date": "2025-05-15",
       "status": "Pending"
     }
   ]
