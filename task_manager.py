@@ -1,23 +1,25 @@
 # task_manager.py
 
-from models import Task
+from models import Task, TaskManager
 
 def create_task(title, description, due_date):
-    try:
-        new_task = Task(title, description, due_date)
-        task = new_task.add_task()
-        if task:
-            print("Task created successfully!")
-            return True
-    except Exception as e:
-        print(f"Error: {e}")
-        
+    tm = TaskManager()
+    tm.load_tasks()
+    task = Task(title, description, due_date)
+    tm.add_task(task)
+    tm.save_tasks()
+    print("Task created successfully!")
+    return True
+
 def display_tasks():
-    tasks = Task.view_tasks()
-    for k,v in tasks.items():
-        print(f"\n{k.capitalize()}:")
-        for task in v:
-            print(f"\033[31mId:\033[0m {task["id"]} - \033[31mTitle:\033[0m {task["title"]} - \033[31mDescription:\033[0m {task["description"]} - \033[31mDue date:\033[0m {task["due_date"]} - \033[31mStatus:\033[0m {task["status"]}")
+    tm = TaskManager()
+    tm.load_tasks()
+    tasks = tm.view_tasks()
+    for task in tasks:
+        print(f"\033[31mId:\033[0m {task.id} - \033[31mTitle:\033[0m {task._title} - \033[31mDescription:\033[0m {task._description} - \033[31mDue date:\033[0m {task._due_date} - \033[31mStatus:\033[0m {task.status}")
+        
+def modify_task():
+    pass
     
 def main():
     print("Menu:\n1. Create a task\n2. View tasks\n3. Update a task\n4. Delete a task\n5. Search for tasks\n6. Exit")
@@ -31,14 +33,13 @@ def main():
                 title = input("Enter task title: ")
                 description = input("Enter task description: ")
                 due_date = input("Enter task due date (YYYY-MM-DD): ")
-                if len(due_date.split("-")) != 3:
-                    print("Invalid format. Please use YYYY-MM-DD")
                 create_task(title, description, due_date)
             elif option == 2:
                 display_tasks()
+            elif option == 3:
+                modify_task()
         except ValueError:
             print("Enter only integer numbers (1 - 6)")
-        
         
 if __name__ == "__main__":
     main()
