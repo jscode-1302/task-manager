@@ -3,15 +3,29 @@
     {
       "id": 1,
       "title": "Study Python",
-      "description": "Learn Django",
-      "due_date": "2025-05-15",
+      "description": "Learn different frameworks",
+      "due_date": "2025-05-20",
       "status": "Pending"
     },
     {
       "id": 2,
       "title": "Practice English",
       "description": "Every saturday with Patrick",
-      "due_date": "2025-04-26",
+      "due_date": "2025-05-03",
+      "status": "Pending"
+    },
+    {
+      "id": 3,
+      "title": "Go to costa rican consulate",
+      "description": "Next friday to ask for our possibilities",
+      "due_date": "2025-05-02",
+      "status": "Pending"
+    },
+    {
+      "id": 4,
+      "title": "Buy food for the week",
+      "description": "Go to the extra market today",
+      "due_date": "2025-04-27",
       "status": "Pending"
     }
   ]

@@ -80,16 +80,30 @@ class TaskManager:
         self.tasks.append(task)
     
     def update_task(self, id, updated_task):
-        pass
+        if self.find_id(id):
+            for index, task in enumerate(self.tasks):
+                if id == task.id:
+                    self.tasks[index] = updated_task
+                    updated_task.id = id # mantenemos id original porque el constructor genera uno nuevo
+                    self.save_tasks()
+                    break
+        else:
+            raise ValueError("Task ID not found.")
     
     def delete_task(self, id):
         pass
     
     def find_task(self, id):
-        pass
+        if self.find_id(id):
+            for index, task in enumerate(self.tasks):
+                if id == task.id:
+                    return self.tasks[index]
     
     def find_id(self, id):
-        pass
+        for task in self.tasks:
+            if id == task.id:
+                return True
+        return False
     
     def view_tasks(self):
         return self.tasks
