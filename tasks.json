@@ -53,14 +53,21 @@
       "id": 9,
       "title": "Buy a Mac",
       "description": "It's a gift for Gisell",
-      "due_date": "2025-05-05",
-      "status": "Pending"
+      "due_date": "2025-04-26",
+      "status": "Completed"
     },
     {
       "id": 10,
       "title": "Buy new summer clothes",
       "description": "T-shirts and shorts",
       "due_date": "2025-05-15",
+      "status": "Pending"
+    },
+    {
+      "id": 11,
+      "title": "Go to my job",
+      "description": "I don't want but I have to",
+      "due_date": "2025-04-28",
       "status": "Pending"
     }
   ]

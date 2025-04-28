@@ -1,12 +1,14 @@
 # utils.py
 
-from datetime import datetime
+from datetime import datetime, date
 import json
 import os
 
 PATH = r'C:\Users\guapi\python-task-manager\tasks.json'
     
 def validate_and_parse_date(date_string):
+    if isinstance(date_string, (date, datetime)):
+        return date_string
     try:
         date_object = datetime.strptime(date_string, "%Y-%m-%d")
         return date_object
