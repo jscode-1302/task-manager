@@ -1,5 +1,7 @@
 # Task and TaskManager classes
-from datetime import datetime
+from datetime import datetime, timedelta
+import os
+import json
 
 class TaskError(Exception):
     pass
@@ -46,7 +48,7 @@ class Task:
     @validate_overdue 
     def is_overdue(self):
         days = datetime.now() - self.created_at
-        if days > 7:
+        if days.days > 7:
             return True
         
     def __str__(self):
@@ -109,3 +111,35 @@ class TaskManager:
                 print(f"Id: {task.id} - Title: {task.title} - Description: {task.description} - Created at: {task.created_at} - Status {task.completed} - Priority: {task.priority}")
         except Exception as e:
             print(f"Error: {e}")
+            
+    def to_dict(self):
+        try:
+            if not self.tasks:
+                raise EmptyListError("There's no data to parse")
+            tasks = []
+            for task in self.tasks:
+                tasks.append({
+                    'id': task.id,
+                    'title': task.title,
+                    'description': task.description,
+                    'created_at': datetime.strftime(task.created_at, "%m/%d/%y"),
+                    'completed': task.completed,
+                    'priority': task.priority
+                })
+            return tasks
+        except Exception as e:
+            print(f"Error: {e}")
+            
+    def save_to_file(self, file):
+        try:
+            if not os.path.exists(file):
+                raise FileNotFoundError("File does not exist.")
+            tasks = self.to_dict()
+            with open(file, 'w') as f:
+                json.dump(tasks, f, indent=2)
+            return True
+        except Exception as e:
+            print(f"Error: {e}")
+                
+        
+        

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Buy groceries",
+    "description": "Milk, eggs, bread",
+    "created_at": "05/15/25",
+    "completed": true,
+    "priority": 3
+  },
+  {
+    "id": 2,
+    "title": "Finish project",
+    "description": "Complete Python exercise",
+    "created_at": "05/15/25",
+    "completed": false,
+    "priority": 5
+  },
+  {
+    "id": 4,
+    "title": "Rent a car for roadtrip",
+    "description": "Save $300 for security deposit",
+    "created_at": "05/15/25",
+    "completed": false,
+    "priority": 1
+  }
+]

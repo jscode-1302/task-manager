@@ -1,5 +1,5 @@
 # main file to instantiate our classes and try them
-from models import TaskManager
+from models import TaskManager, Task
 
 # Example usage
 manager = TaskManager()
@@ -24,4 +24,9 @@ print("-" * 40)
 print("Searching for tasks")
 manager.search("python") 
 
-# manager.save_to_file("tasks.json")
+print("-" * 40)
+print("Is task overdue?")
+task = Task("Try is_overdue method", "It must return a message depends on whether is overdue", priority=3)
+task.is_overdue()
+
+manager.save_to_file(r'./tasks.json')
