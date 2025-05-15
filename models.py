@@ -2,6 +2,7 @@
 from datetime import datetime, timedelta
 import os
 import json
+from utils import get_id
 
 class TaskError(Exception):
     pass
@@ -11,6 +12,8 @@ class TaskAlreadyCompletedError(TaskError):
 
 class EmptyListError(TaskError):
     pass
+
+file = r'./tasks.json'
 
 def validate_overdue(func):
     def wrapper(*args, **kwargs):
@@ -23,17 +26,16 @@ def validate_overdue(func):
     return wrapper
 
 class Task:
-    id = 1
     
-    def __init__(self, title, description, priority, created_at=datetime.now(), completed=False):
+    def __init__(self, title, description, priority, completed=False):
         self.title = title
         self.description = description
         self.priority = priority
-        self.created_at = created_at
+        self.created_at = datetime.now()
         self.completed = completed
-        self.id = Task.id
         
-        Task.id += 1
+        self.id = get_id(file)
+        
         
     @property
     def priority(self):
@@ -132,11 +134,22 @@ class TaskManager:
             
     def save_to_file(self, file):
         try:
-            if not os.path.exists(file):
-                raise FileNotFoundError("File does not exist.")
             tasks = self.to_dict()
+            # Verifica si el archivo existe y si está vacío
+            if not os.path.exists(file) or os.stat(file).st_size == 0:
+                with open(file, 'w') as f:
+                    json.dump(tasks, f, indent=2)
+                return True
+            # Si el archivo tiene datos, carga las tareas existentes y agrega las nuevas
+            with open(file, 'r') as f:
+                try:
+                    existing_tasks = json.load(f)
+                except json.JSONDecodeError:
+                    existing_tasks = []
+            # Combina las tareas existentes con las nuevas (puedes ajustar la lógica según tu necesidad)
+            all_tasks = existing_tasks + tasks
             with open(file, 'w') as f:
-                json.dump(tasks, f, indent=2)
+                json.dump(all_tasks, f, indent=2)
             return True
         except Exception as e:
             print(f"Error: {e}")
