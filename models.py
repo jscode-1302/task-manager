@@ -62,11 +62,14 @@ class Task:
 class TaskManager:
     def __init__(self):
         self.tasks = []
+        self.id_counter = 1
         
     def add_task(self, title, description, priority):
         try:
             new_task = Task(title, description, priority)
+            new_task.id = self.id_counter
             self.tasks.append(new_task)
+            self.id_counter += 1
             return True
         except ValueError as e:
             print(f"Error: {e}")
@@ -135,21 +138,8 @@ class TaskManager:
     def save_to_file(self, file):
         try:
             tasks = self.to_dict()
-            # Verifica si el archivo existe y si está vacío
-            if not os.path.exists(file) or os.stat(file).st_size == 0:
-                with open(file, 'w') as f:
-                    json.dump(tasks, f, indent=2)
-                return True
-            # Si el archivo tiene datos, carga las tareas existentes y agrega las nuevas
-            with open(file, 'r') as f:
-                try:
-                    existing_tasks = json.load(f)
-                except json.JSONDecodeError:
-                    existing_tasks = []
-            # Combina las tareas existentes con las nuevas (puedes ajustar la lógica según tu necesidad)
-            all_tasks = existing_tasks + tasks
             with open(file, 'w') as f:
-                json.dump(all_tasks, f, indent=2)
+                json.dump(tasks, f, indent=2)
             return True
         except Exception as e:
             print(f"Error: {e}")
