@@ -12,8 +12,6 @@ class TaskAlreadyCompletedError(TaskError):
 class EmptyListError(TaskError):
     pass
 
-file = r'./tasks.json'
-
 def validate_overdue(func):
     def wrapper(*args, **kwargs):
         overdue = func(*args)
@@ -95,8 +93,7 @@ class TaskManager:
             if not self.tasks:
                 raise EmptyListError("No tasks to display")
             tasks = sorted(self.tasks, key= lambda x: x.priority)
-            for task in tasks:
-                print(f"Id: {task.id} - Title: {task.title} - Description: {task.description} - Created at: {task.created_at} - Status {task.completed} - Priority: {task.priority}")
+            return tasks
         except Exception as e:
             print(f"Error: {e}")
             
@@ -108,8 +105,7 @@ class TaskManager:
             if not results:
                 return []
             sorted_results = sorted(results, key= lambda x: x.priority)
-            for task in sorted_results:
-                print(f"Id: {task.id} - Title: {task.title} - Description: {task.description} - Created at: {task.created_at} - Status {task.completed} - Priority: {task.priority}")
+            return sorted_results
         except Exception as e:
             print(f"Error: {e}")
             
