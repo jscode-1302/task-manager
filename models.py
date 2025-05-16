@@ -2,7 +2,6 @@
 from datetime import datetime, timedelta
 import os
 import json
-from utils import get_id
 
 class TaskError(Exception):
     pass
@@ -32,10 +31,7 @@ class Task:
         self.description = description
         self.priority = priority
         self.created_at = datetime.now()
-        self.completed = completed
-        
-        self.id = get_id(file)
-        
+        self.completed = completed   
         
     @property
     def priority(self):
